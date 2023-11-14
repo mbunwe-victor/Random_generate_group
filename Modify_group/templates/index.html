@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        .group {
+            margin-top: 20px;
+        }
+        .table {
+            width: 50%;
+            margin: 20px auto;
+        }
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .actions button {
+            margin-right: 5px;
+        }
+        .group {
+            display: inline-block;
+            width: 25%;
+            padding: 10px;
+        }
+        /* .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        } */
+        .form-group {
+            margin-bottom: 10px;
+            margin-right: 30px;
+            width: 75%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Student Group Management System</h1>
+        <h1>Add Student</h1>
+        <!-- <form action="/add_student" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" name="student_name" placeholder="Student Name">
+                <input type="text" class="form-control" name="student_gender" placeholder="Student Gender">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Student</button>
+        </form> -->
+
+        <div class="container">
+            <form action="/add_student" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="student_name" placeholder="Student Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="student_gender" placeholder="Student Gender">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="group">
+                    <h1>Group 1</h1>
+                    {% for student in group1 %}
+                    <p>{{ student.name }}</p>
+                    {% endfor %}
+                </div>
+                <div class="group">
+                    <h1>Group 2</h1>
+                    {% for student in group2 %}
+                    <p>{{ student.name }}</p>
+                    {% endfor %}
+                </div>
+                <div class="group">
+                    <h1>Group 3</h1>
+                    {% for student in group3 %}
+                    <p>{{ student.name }}</p>
+                    {% endfor %}
+                </div>
+                <div class="group">
+                    <h1>Group 4</h1>
+                    {% for student in group4 %}
+                    <p>{{ student.name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <h1>Student Table</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td class="actions">
+                        <a href="/edit_student/{{ student.id }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="/delete_student/{{ student.id }}" method="POST" style="display: inline;">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                        <button class="btn btn-success btn-sm" onclick="assignToGroup({{ student.id }})">Assign to Group</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function assignToGroup(studentId) {
+            fetch(`/assign_group/${studentId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Assigned student ${data.studentName} to Group ${data.groupNumber}`);
+                    } else {
+                        alert('Failed to assign student to a group');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Groups</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .group {
+            display: inline-block;
+            width: 25%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="group">
+                <h1>Group 1</h1>
+                {% for student in group1 %}
+                <p>{{ student.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="group">
+                <h1>Group 2</h1>
+                {% for student in group2 %}
+                <p>{{ student.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="group">
+                <h1>Group 3</h1>
+                {% for student in group3 %}
+                <p>{{ student.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="group">
+                <h1>Group 4</h1>
+                {% for student in group4 %}
+                <p>{{ student.name }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html> -->

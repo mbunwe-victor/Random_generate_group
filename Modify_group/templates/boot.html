@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Student</h1>
+        <form action="/add_student" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" name="student_name" placeholder="Student Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Student</button>
+        </form>
+
+        <div class="group">
+            <h1>Group 1</h1>
+            <!-- Display students from group 1 -->
+        </div>
+
+        <div class="group">
+            <h1>Group 2</h1>
+            <!-- Display students from group 2 -->
+        </div>
+
+        <div class="group">
+            <h1>Group 3</h1>
+            <!-- Display students from group 3 -->
+        </div>
+
+        <div class="group">
+            <h1>Group 4</h1>
+            <!-- Display students from group 4 -->
+        </div>
+
+        <h1>Student Table</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editStudent(1)">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(1)">Delete</button>
+                        <button class="btn btn-success" onclick="assignToGroup(1)">Assign to Group</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="editStudent(2)">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(2)">Delete</button>
+                        <button class="btn btn-success" onclick="assignToGroup(2)">Assign to Group</button>
+                    </td>
+                </tr>
+                <!-- Add more rows for each student -->
+            </tbody>
+        </table>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
